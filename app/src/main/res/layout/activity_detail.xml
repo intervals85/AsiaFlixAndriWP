@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    android:id="@+id/nested"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".activity.DetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/softBlue" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/gardient_trans_center" />
+        </FrameLayout>
+
+        <ImageButton
+            android:layout_marginTop="15dp"
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_arrow_back_24" />
+
+        <ImageButton
+            android:layout_marginTop="15dp"
+            android:id="@+id/btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_share_24" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:descendantFocusability="blocksDescendants"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Korean Drama"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_toLeftOf="@+id/fab"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.veinhorn.tagview.TagView
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:layout_marginRight="10dp"
+                        app:tagTextColor="@color/white"
+                        app:tagCircleRadius="0"
+                        android:id="@+id/tagView1"
+                        app:tagBorderRadius="5"
+                        android:text="Drama"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:tagColor="@color/darkTransparent"
+                        app:tagUpperCase="false"/>
+
+                    <com.veinhorn.tagview.TagView
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:layout_marginRight="10dp"
+                        app:tagTextColor="@color/white"
+                        app:tagCircleRadius="0"
+                        android:id="@+id/tagView2"
+                        app:tagBorderRadius="5"
+                        android:text="Romance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:tagColor="@color/darkTransparent"
+                        app:tagUpperCase="false"/>
+                    <com.veinhorn.tagview.TagView
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:layout_marginRight="10dp"
+                        app:tagTextColor="@color/white"
+                        app:tagCircleRadius="0"
+                        android:id="@+id/tagView3"
+                        app:tagBorderRadius="5"
+                        android:text="China"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:tagColor="@color/darkTransparent"
+                        app:tagUpperCase="false"/>
+                </LinearLayout>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:src="@drawable/ic_love"
+                    app:tint="@color/white"
+                    app:backgroundTint="@color/softBlue"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text_title_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Korean Drama"
+                android:textColor="@color/softBlue"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/text_released"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2022 |"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/text_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gu Qian Yu, as a child, was involved in a car accident in which he lost his parents. Tragedy left a deep scar on him, in the form of psychological trauma, that doesn't allow him to get closer to other people. So he goes through his life, unable to love and feeling loved, by anyone. However, that changes one day when he meets Zeng Fan Xing. And there would be nothing strange about this meeting, if not for the fact, that the girl is a robot who is supposed to keep him company, but also to heal his emotional scars."
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/category_name"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="Episode"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <ImageButton
+                    android:id="@+id/btn_more"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/baseline_sort_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:id="@+id/recyclerView"
+                app:spanCount="3"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/episode_item"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

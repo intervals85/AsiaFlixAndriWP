@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:checkable="true"
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+    <item
+        android:checkable="true"
+        android:id="@+id/kshow"
+        android:title="K-Show"
+        android:icon="@drawable/ic_kshow" />
+    <item
+        android:checkable="true"
+        android:id="@+id/popular"
+        android:title="Popular"
+        android:icon="@drawable/ic_popular" />
+    <item
+        android:checkable="true"
+        android:id="@+id/library"
+        android:title="Library"
+        android:icon="@drawable/ic_library" />
+</menu>
