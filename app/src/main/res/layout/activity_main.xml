@@ -21,20 +21,25 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:text="Asia - "
-                android:textColor="@color/softBlue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:text="Flix "
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+          <androidx.appcompat.widget.LinearLayoutCompat
+              android:id="@+id/linear"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+              <TextView
+                  android:textStyle="bold"
+                  android:textSize="20dp"
+                  android:text="Asia - "
+                  android:textColor="@color/softBlue"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+              <TextView
+                  android:textStyle="bold"
+                  android:textSize="20dp"
+                  android:text="Flix "
+                  android:textColor="@color/white"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+          </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.viewpager.widget.ViewPager

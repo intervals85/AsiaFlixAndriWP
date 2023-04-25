@@ -3,7 +3,9 @@ package com.app.asiaflixapp.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SearchView
 import androidx.viewpager.widget.ViewPager
 import com.app.asiaflixapp.R
 import com.app.asiaflixapp.adapter.ViewPagerAdapter
@@ -68,6 +70,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
+        val searchView = menu?.findItem(R.id.acion_search)?.actionView as SearchView
+        searchView.setOnQueryTextFocusChangeListener(object : View.OnFocusChangeListener {
+            override fun onFocusChange(p0: View?, p1: Boolean) {
+                 if (p1) binding.linear.visibility =View.GONE
+                else binding.linear.visibility =View.VISIBLE
+            }
+
+        })
         return true
     }
 }
