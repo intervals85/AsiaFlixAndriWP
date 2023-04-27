@@ -2,6 +2,9 @@
 <RelativeLayout android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="150dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:layout_height="200dp"
     android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">

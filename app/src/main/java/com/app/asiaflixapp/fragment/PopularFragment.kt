@@ -71,7 +71,7 @@ class PopularFragment : Fragment()  {
 
     }
 
-    val listenerResponse = object :FetchPage.Listener {
+  private  val listenerResponse = object :FetchPage.Listener {
         override fun onSuccess(result: String) {
             binding.loadingProgress.visibility= View.GONE
             fetchPage =null

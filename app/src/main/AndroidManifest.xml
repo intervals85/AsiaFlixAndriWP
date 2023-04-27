@@ -12,7 +12,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsiaFlix"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.StarActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.DetailActivity"
             android:exported="false" />
