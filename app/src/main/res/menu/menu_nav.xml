@@ -9,13 +9,13 @@
         android:title="Home" />
     <item
         android:checkable="true"
-        android:id="@+id/kshow"
-        android:title="K-Show"
+        android:id="@+id/popular"
+        android:title="Popular"
         android:icon="@drawable/ic_kshow" />
     <item
         android:checkable="true"
-        android:id="@+id/popular"
-        android:title="Popular"
+        android:id="@+id/star"
+        android:title="Star"
         android:icon="@drawable/ic_popular" />
     <item
         android:checkable="true"

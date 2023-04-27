@@ -29,8 +29,6 @@ class HomeFragment : Fragment(), FetchPage.Listener {
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-      //  getData()
-      //  initSlider()
         FetchPage(this).execute(Utils.base_url)
         getPopular()
         return binding.root
@@ -68,31 +66,6 @@ class HomeFragment : Fragment(), FetchPage.Listener {
             }
 
         }).execute(Utils.base_url+"anclytic.html?id=1")
-    }
-
-    private fun initSlider() {
-        val sliderAdapter = SliderAdapter(requireContext())
-        binding.imageSlider?.setSliderAdapter(sliderAdapter!!)
-        binding.imageSlider?.setIndicatorAnimation(IndicatorAnimationType.WORM)
-        binding.imageSlider?.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
-        binding.imageSlider?.startAutoCycle()
-        for (i in 0..5) {
-            val item =BannerModel("this title $i", "https://imagecdn.me/cover/love-star-2023-1680537786.png", "2023","https://www1.watchasian.id/love-star-2023-episode-22.html $i", )
-            sliderAdapter.addItem(item)
-        }
-        sliderAdapter.notifyDataSetChanged()
-    }
-
-    private fun getData() {
-   /*     for (i in 0..5) {
-            films.add(FilmModel("this is titl $i","https://imagecdn.me/cover/love-star-2023-1680537786.png",
-                "https://www1.watchasian.id/love-star-2023-episode-22.html $i", "Ep 12" ))
-        }
-        for (i in 0..3) {
-            list.add(HomeModel("Korea $i", "link $i", films))
-
-        }
-        binding.recyclerView.adapter =HomeAdapter(list)*/
     }
 
     override fun onSuccess(result: String) {

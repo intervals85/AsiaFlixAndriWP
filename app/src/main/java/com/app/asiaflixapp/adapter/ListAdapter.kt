@@ -19,6 +19,7 @@ class ListAdapter(data: MutableList<FilmModel> = arrayListOf()) :
 
     override fun convert(holder: BaseViewHolder, item: FilmModel) {
         val x = ListItemBinding.bind(holder.itemView)
+        if (item.episode==null) x.cardEpisode.visibility=View.GONE
         x.textEpisode.text = item.episode
          Utils.loadImage(context, item.imageUrl, x.image)
         x.textTitle.text = item.title
