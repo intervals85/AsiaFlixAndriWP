@@ -19,6 +19,7 @@ import java.util.*
 
 object Utils {
 
+    val base_url = "https://watchasian.la/"
     fun setSystemBarColor(act: Activity, @ColorRes color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val window: Window = act.window
@@ -120,12 +121,6 @@ object Utils {
         Glide.with(context).load(url).into(image)
     }
 
-    fun Any.convertRupiah(): String {
-        val localId = Locale("in", "ID")
-        val formatter = NumberFormat.getCurrencyInstance(localId)
-        val strFormat = formatter.format(this)
-        return strFormat.replace("Rp", "Rp. ")
-    }
 
     fun showDateDialog(context: Context, edtDate: EditText)  {
         val calendar: Calendar = Calendar.getInstance()

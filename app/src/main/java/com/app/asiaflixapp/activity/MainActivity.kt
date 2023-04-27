@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-        //test fix
         binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrolled(
                 position: Int,
