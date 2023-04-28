@@ -4,14 +4,17 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Build
+import android.view.LayoutInflater
 import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.ColorRes
+import com.app.asiaflixapp.databinding.TagItemBinding
 import com.bumptech.glide.Glide
-import java.text.NumberFormat
+import com.veinhorn.tagview.TagView
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -137,6 +140,13 @@ object Utils {
         )
 
         datePickerDialog.show()
+    }
+
+    fun tagView( text: String, layoutInflater: LayoutInflater): FrameLayout {
+        val binding = TagItemBinding.inflate(layoutInflater)
+        binding.tagView.text= text
+        return  binding.root
+
     }
 
 

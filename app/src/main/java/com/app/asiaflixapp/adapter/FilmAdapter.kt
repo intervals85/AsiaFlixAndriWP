@@ -21,8 +21,8 @@ class FilmAdapter(data: MutableList<FilmModel> = arrayListOf()) :
         x.textEpisode.text = item.episode
         Utils.loadImage(context, item.imageUrl, x.image)
         x.root.setOnClickListener {
-            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
-            holder.itemView.context.startActivity(intent)
+           /* val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            holder.itemView.context.startActivity(intent)*/
         }
     }
 

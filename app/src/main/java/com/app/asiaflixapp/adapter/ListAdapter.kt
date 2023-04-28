@@ -19,13 +19,14 @@ class ListAdapter(data: MutableList<FilmModel> = arrayListOf()) :
 
     override fun convert(holder: BaseViewHolder, item: FilmModel) {
         val x = ListItemBinding.bind(holder.itemView)
-        if (item.episode==null) x.cardEpisode.visibility=View.GONE
+        if (item.episode == null) x.cardEpisode.visibility = View.GONE
         x.textEpisode.text = item.episode
-         Utils.loadImage(context, item.imageUrl, x.image)
+        Utils.loadImage(context, item.imageUrl, x.image)
         x.textTitle.text = item.title
         x.textYear.text = item.released
         x.root.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("link", item.filmLink)
             holder.itemView.context.startActivity(intent)
         }
     }

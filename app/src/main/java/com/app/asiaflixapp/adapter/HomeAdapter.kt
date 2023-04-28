@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.asiaflixapp.R
+import com.app.asiaflixapp.activity.MoreActivity
 import com.app.asiaflixapp.databinding.HomeItemBinding
 import com.app.asiaflixapp.helper.Utils
 import com.app.asiaflixapp.model.HomeModel
@@ -17,7 +18,9 @@ class HomeAdapter( data: MutableList<HomeModel> = arrayListOf()) :
         val x = HomeItemBinding.bind(holder.itemView)
         x.categoryName.text = item.categoryName
         x.btnMore.setOnClickListener {
-            Utils.toast(context, item.categoryLink)
+            val intent = Intent(context, MoreActivity::class.java)
+            intent.putExtra("link", item.categoryLink)
+            context.startActivity(intent)
         }
 
         x.recyclerView.apply {

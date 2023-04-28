@@ -1,6 +1,7 @@
 package com.app.asiaflixapp.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.app.asiaflixapp.R
+import com.app.asiaflixapp.activity.DetailActivity
 import com.app.asiaflixapp.model.BannerModel
 import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
@@ -54,7 +56,9 @@ class SliderAdapter(context: Context) : SliderViewAdapter<SliderAdapter.SliderAd
             .load(sliderItem.imageUrl)
             .into(viewHolder.imageViewBackground)
         viewHolder.itemView.setOnClickListener {
-            Toast.makeText(context, "This is item in position $position", Toast.LENGTH_SHORT).show()
+            val intent = Intent(viewHolder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("link", sliderItem.filmUrl)
+            viewHolder.itemView.context.startActivity(intent)
         }
     }
 

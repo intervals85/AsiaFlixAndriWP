@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.veinhorn.tagview.TagView
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:layout_marginRight="10dp"
+        app:tagTextColor="@color/white"
+        app:tagCircleRadius="0"
+        android:id="@+id/tagView"
+        app:tagBorderRadius="5"
+        android:text="China"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tagColor="@color/darkTransparent"
+        app:tagUpperCase="false"/>
+</FrameLayout>

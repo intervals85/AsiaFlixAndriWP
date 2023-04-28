@@ -22,6 +22,9 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             android:id="@+id/btn_more"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"

@@ -69,6 +69,7 @@ class HomeFragment : Fragment(), FetchPage.Listener {
     }
 
     override fun onSuccess(result: String) {
+        list.clear()
         val doc = Jsoup.parse(result)
         val contentLeft = doc.getElementsByClass("content-left")
             .select("div.tab-container")
