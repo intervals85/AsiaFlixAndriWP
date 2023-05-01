@@ -35,10 +35,17 @@ class PopularFragment : Fragment()  {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPopularBinding.inflate(layoutInflater)
-        fetchPage =   FetchPage( listenerResponse)
-        fetchPage!!.execute(Utils.base_url+"most-popular-drama?page="+page)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getData()
+        }
+        getData()
         initRV()
         return binding.root
+    }
+
+    private fun getData() {
+        fetchPage =   FetchPage( listenerResponse)
+        fetchPage!!.execute(Utils.base_url+"most-popular-drama?page="+page)
     }
 
     private fun initRV() {
@@ -73,6 +80,10 @@ class PopularFragment : Fragment()  {
 
   private  val listenerResponse = object :FetchPage.Listener {
         override fun onSuccess(result: String) {
+            binding.swipeRefreshLayout.isEnabled= false
+            binding.linearMain.visibility=View.VISIBLE
+            binding.errorLayout.root.visibility=View.GONE
+
             binding.loadingProgress.visibility= View.GONE
             fetchPage =null
             val doc = Jsoup.parse(result)
@@ -92,6 +103,12 @@ class PopularFragment : Fragment()  {
         }
 
         override fun onFailed(error: String) {
+            binding.swipeRefreshLayout.isEnabled= false
+            if (page==1) {
+                binding.swipeRefreshLayout.isEnabled= true
+                binding.linearMain.visibility=View.GONE
+                binding.errorLayout.root.visibility=View.VISIBLE
+            }
             binding.loadingProgress.visibility= View.GONE
 
         }

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "706500286107",
+    "project_id": "asia-flix-15426",
+    "storage_bucket": "asia-flix-15426.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706500286107:android:10b79993ab27dbecb3183e",
+        "android_client_info": {
+          "package_name": "com.app.asiaflixapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706500286107-e0ih31olufavitqtlglku30okfkkahd7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.asiaflixapp",
+            "certificate_hash": "94ee2f31c89ab1d50f6c0f48cfdf99b3a6549b3a"
+          }
+        },
+        {
+          "client_id": "706500286107-ffpvoq405roo6p5uv1enlliobjj6u7pr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNDZAdQ2_iLOUQ0H5MiNIOO2H5z0Bdtio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706500286107-ffpvoq405roo6p5uv1enlliobjj6u7pr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

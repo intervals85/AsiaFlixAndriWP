@@ -1,13 +1,19 @@
 package com.app.asiaflixapp.activity
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
@@ -16,10 +22,24 @@ import androidx.viewpager.widget.ViewPager
 import com.app.asiaflixapp.R
 import com.app.asiaflixapp.adapter.ViewPagerAdapter
 import com.app.asiaflixapp.databinding.ActivityMainBinding
-import com.app.asiaflixapp.fragment.*
+import com.app.asiaflixapp.fragment.HomeFragment
+import com.app.asiaflixapp.fragment.LibraryFragment
+import com.app.asiaflixapp.fragment.PopularFragment
+import com.app.asiaflixapp.fragment.StarFragment
+import com.app.asiaflixapp.helper.Utils
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -28,9 +48,43 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initBotNav()
         initNavDraw()
-
+        subscribeToPushService()
+        checkNotificationPermission()
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    fun checkNotificationPermission() {
+        val permission = Manifest.permission.POST_NOTIFICATIONS
+        Dexter.withContext(this)
+            .withPermission(permission)
+            .withListener(object : PermissionListener {
+                override fun onPermissionGranted(response: PermissionGrantedResponse) {
+
+                }
+
+                override fun onPermissionDenied(response: PermissionDeniedResponse) {
+                    Utils.toast(this@MainActivity, "you had denied permission this app wont work feature properly")
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permission: PermissionRequest?,
+                    token: PermissionToken?
+                ) {
+                    token?.continuePermissionRequest()
+                }
+            }).check()
+    }
+
+    private fun subscribeToPushService() {
+        try {
+            FirebaseApp.initializeApp(this)
+            FirebaseMessaging.getInstance().subscribeToTopic(packageName)
+            Log.d("AndroidBash", "Subscribed")
+            //  Toast.makeText(MainActivity.this, "Subscribed", Toast.LENGTH_SHORT).show();
+        } catch (i: IllegalArgumentException) {
+            i.message
+        }
+    }
     private fun initNavDraw() {
         val drawerToggle = object : ActionBarDrawerToggle(
             this,
@@ -179,5 +233,20 @@ class MainActivity : AppCompatActivity() {
 
         })
         return true
+    }
+
+
+    var doubleBackToExitPressedOnce = false
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            val homeIntent = Intent(Intent.ACTION_MAIN)
+            homeIntent.addCategory(Intent.CATEGORY_HOME)
+            homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(homeIntent)
+            return
+        }
+        doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Tap Once Again To Close..", Toast.LENGTH_SHORT).show()
+        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 }

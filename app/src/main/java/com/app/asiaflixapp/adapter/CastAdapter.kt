@@ -30,10 +30,14 @@ class CastAdapter(data: MutableList<CastModel> = arrayListOf()) :
 
         x.textName.text = item.name
         x.root.setOnClickListener {
-            /*val json = Gson().toJson(item)
+            val star = StarModel()
+            star.name = item.name
+            star.link = item.link
+            star.imageUrl = item.image
+             val json = Gson().toJson(star )
             val intent = Intent(holder.itemView.context, StarActivity::class.java)
             intent.putExtra("json", json)
-            holder.itemView.context.startActivity(intent)*/
+            holder.itemView.context.startActivity(intent)
         }
     }
 

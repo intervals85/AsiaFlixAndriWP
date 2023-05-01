@@ -33,6 +33,17 @@ class DetailActivity : AppCompatActivity(), FetchPage.Listener {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initOnClick()
+        binding.relativeMain.visibility=View.GONE
+        binding.swipeRefreshLayout.isRefreshing=true
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getData()
+        }
+        getData()
+
+        initButtonFav()
+    }
+
+    private fun getData() {
         actualLink = getActualLink(intent.getStringExtra("link"))
         if (intent.hasExtra("linkNotActual")) {
             FetchPage(object : FetchPage.Listener {
@@ -47,15 +58,15 @@ class DetailActivity : AppCompatActivity(), FetchPage.Listener {
                 }
 
                 override fun onFailed(error: String) {
-
+                    binding.relativeMain.visibility=View.GONE
+                    binding.errorLayout.root.visibility=View.VISIBLE
+                    binding.swipeRefreshLayout.isRefreshing=false
                 }
             }).execute(actualLink)
         } else {
             FetchPage(this)
                 .execute(actualLink)
         }
-
-        initButtonFav()
     }
 
     private fun initButtonFav() {
@@ -84,6 +95,9 @@ class DetailActivity : AppCompatActivity(), FetchPage.Listener {
     }
 
     override fun onSuccess(result: String) {
+        binding.relativeMain.visibility=View.VISIBLE
+        binding.errorLayout.root.visibility=View.GONE
+        binding.swipeRefreshLayout.isRefreshing=false
         val document = Jsoup.parse(result)
         val elements = document.getElementsByClass("block").select("div.details")
           image = elements.select("div.img").select("img").attr("src")
@@ -166,6 +180,9 @@ class DetailActivity : AppCompatActivity(), FetchPage.Listener {
     }
 
     override fun onFailed(error: String) {
+        binding.relativeMain.visibility=View.GONE
+        binding.errorLayout.root.visibility=View.VISIBLE
+        binding.swipeRefreshLayout.isRefreshing=false
         Log.d(TAG, "onFailed: $error")
     }
 

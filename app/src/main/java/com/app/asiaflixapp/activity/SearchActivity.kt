@@ -30,9 +30,17 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getData()
+        }
+        getData()
+        initRV()
+    }
+
+    private fun getData() {
         fetchPage =   FetchPage( listenerResponse)
         fetchPage!!.execute(Utils.base_url+intent.getStringExtra("link")+"&page="+page)
-        initRV()
     }
 
 
@@ -68,6 +76,9 @@ class SearchActivity : AppCompatActivity() {
 
     private  val listenerResponse = object :FetchPage.Listener {
         override fun onSuccess(result: String) {
+            binding.swipeRefreshLayout.isEnabled= true
+            binding.linearMain.visibility=View.VISIBLE
+            binding.errorLayout.root.visibility=View.GONE
             binding.loadingProgress.visibility= View.GONE
             fetchPage =null
             val doc = Jsoup.parse(result)
@@ -76,6 +87,7 @@ class SearchActivity : AppCompatActivity() {
 
             val filmsElements =  contentLeft.select("div.left-tab-1").select("ul.list-episode-item")
                 .select("li")
+            if (filmsElements.isEmpty()) Utils.toast(this@SearchActivity, "Sorry, can not find what you looking for")
             Log.d(TAG, "onSuccess: ${ doc.getElementsByClass("content-left")}")
             filmsElements.forEach {
                 val title = it.select("a").select("h3").text()
@@ -87,6 +99,12 @@ class SearchActivity : AppCompatActivity() {
         }
 
         override fun onFailed(error: String) {
+            binding.swipeRefreshLayout.isEnabled= false
+            if (page==1) {
+                binding.swipeRefreshLayout.isEnabled= true
+                binding.linearMain.visibility=View.GONE
+                binding.errorLayout.root.visibility=View.VISIBLE
+            }
             Log.d(TAG, "onFailed: ")
             binding.loadingProgress.visibility= View.GONE
 

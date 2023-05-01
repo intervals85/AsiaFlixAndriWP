@@ -23,11 +23,20 @@ class StarActivity : AppCompatActivity(), FetchPage.Listener, View.OnClickListen
         super.onCreate(savedInstanceState)
         binding = ActivityStarBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        starModel = Gson().fromJson(intent.getStringExtra("json"), StarModel::class.java)
-        FetchPage(this).execute(Utils.base_url+starModel.link)
+        binding.swipeRefreshLayout.isRefreshing=true
+        binding.relativeMain.visibility=View.GONE
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getData()
+        }
+        getData()
         initData()
         binding.textProfile.setOnClickListener(this)
         binding.textFilms.setOnClickListener(this)
+    }
+
+    private fun getData() {
+        starModel = Gson().fromJson(intent.getStringExtra("json"), StarModel::class.java)
+        FetchPage(this).execute(Utils.base_url+starModel.link)
     }
 
     private fun initData() {
@@ -37,6 +46,9 @@ class StarActivity : AppCompatActivity(), FetchPage.Listener, View.OnClickListen
     }
 
     override fun onSuccess(result: String) {
+        binding.relativeMain.visibility=View.VISIBLE
+        binding.errorLayout.root.visibility=View.GONE
+        binding.swipeRefreshLayout.isRefreshing=false
         val doc = Jsoup.parse(result)
         val contentleft = doc.getElementsByClass("content-left")
             .select("div.info")
@@ -67,6 +79,9 @@ class StarActivity : AppCompatActivity(), FetchPage.Listener, View.OnClickListen
     }
 
     override fun onFailed(error: String) {
+        binding.relativeMain.visibility=View.GONE
+        binding.errorLayout.root.visibility=View.VISIBLE
+        binding.swipeRefreshLayout.isRefreshing=false
 
     }
 

@@ -40,31 +40,33 @@ import org.json.JSONObject
 import java.util.ArrayList
 import java.util.HashMap
 
-class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
+class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener {
     var TAG = "EpisodeActivityTAG"
     private var episodes: ArrayList<EpisodeModel>? = null
     private var episodeAdapter: EpisodeAdapter? = null
+
     //private var interstitialAd: MaxInterstitialAd? = null
     private var retryAttempt = 0
     private var TEST_PAGE_URL: String? = null
     var linkStream = arrayListOf<String>()
-      var fetchPage :FetchPage?=null
+    var fetchPage: FetchPage? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        film_image =intent.getStringExtra("film_image")!!
-        film_title =intent.getStringExtra("film_title")!!
+        film_image = intent.getStringExtra("film_image")!!
+        film_title = intent.getStringExtra("film_title")!!
         episodes = ArrayList()
-        episodeAdapter =  EpisodeAdapter(  episodes!! )
+        episodeAdapter = EpisodeAdapter(episodes!!)
         binding.recyclerView.setAdapter(episodeAdapter)
         binding.recyclerView.setLayoutManager(GridLayoutManager(this, 3))
+        binding.linearLayout.visibility=View.GONE
         binding.swipeRefreshLayout.setRefreshing(true)
         episodeAdapter!!.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
                 val item = episodes!![position]
                 val intent = Intent(this@EpisodeActivity, EpisodeActivity::class.java)
                 intent.putExtra("film_title", film_title)
-                intent.putExtra("film_image",  film_image)
+                intent.putExtra("film_image", film_image)
                 intent.putExtra("link", item.episodeLink)
                 intent.putExtra("title", item.episode)
                 startActivity(intent)
@@ -76,11 +78,11 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
         getData()
 
         //TODO IKLAN
-    /*    AppLovinSdk.getInstance(this).mediationProvider = "max"
-        AppLovinSdk.initializeSdk(this) {
-            ShowMaxBannerAd()
-            LoadMaxInterstitialAd()
-        }*/
+        /*    AppLovinSdk.getInstance(this).mediationProvider = "max"
+            AppLovinSdk.initializeSdk(this) {
+                ShowMaxBannerAd()
+                LoadMaxInterstitialAd()
+            }*/
     }
 
     private fun getData() {
@@ -91,14 +93,14 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-           // ParsePageTask().execute(intent.getStringExtra("link"))
+            // ParsePageTask().execute(intent.getStringExtra("link"))
             fetchPage = FetchPage(jsonListener)
-               link = if (intent.getStringExtra("link")!!.startsWith("http"))
-                   intent.getStringExtra("link")!!
-            else   Utils.base_url+intent.getStringExtra("link")!!
+            link = if (intent.getStringExtra("link")!!.startsWith("http"))
+                intent.getStringExtra("link")!!
+            else Utils.base_url + intent.getStringExtra("link")!!
 
 
-            fetchPage!!. execute(link)
+            fetchPage!!.execute(link)
             gotoWebView(link)
         }
     }
@@ -108,12 +110,12 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
         binding.webview!!.settings.javaScriptEnabled = false
         binding.webview!!.visibility = View.GONE
         binding.exoPlayerView.visibility = View.VISIBLE
-        if (linkStream.size!=0) {
-            if (playerView!!.player!!.isPlaying){
-                playerView!!.player!!.playWhenReady=false
+        if (linkStream.size != 0) {
+            if (playerView!!.player!!.isPlaying) {
+                playerView!!.player!!.playWhenReady = false
                 simpleExoPlayer!!.stop()
             }
-            playerView!!.player!!.playWhenReady=true
+            playerView!!.player!!.playWhenReady = true
             playVideo(linkStream.first())
         }
     }
@@ -124,12 +126,12 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
         binding.webview!!.visibility = View.GONE
         binding.exoPlayerView.visibility = View.VISIBLE
 
-        if (linkStream.size==2) {
-            if (playerView!!.player!!.isPlaying){
-                playerView!!.player!!.playWhenReady=false
+        if (linkStream.size == 2) {
+            if (playerView!!.player!!.isPlaying) {
+                playerView!!.player!!.playWhenReady = false
                 simpleExoPlayer!!.stop()
             }
-            playerView!!.player!!.playWhenReady=true
+            playerView!!.player!!.playWhenReady = true
             playVideo(linkStream[1])
         }
     }
@@ -196,6 +198,7 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
     override fun onPageFinished(url: String) {
 
     }
+
     override fun onPageError(errorCode: Int, description: String, failingUrl: String) {
         Log.d(TAG, "onPageError: ")
     }
@@ -220,14 +223,14 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
         TEST_PAGE_URL = "https:$src"
         Log.i("gotoWebView: ", src!!)
         //   mWebView.setListener(this, this);
-        binding.   webview!!.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        binding.webview!!.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         /*     mWebView.setGeolocationEnabled(false);
         mWebView.setMixedContentAllowed(false);
         mWebView.setCookiesEnabled(true);
         mWebView.setThirdPartyCookiesEnabled(true);*/
-        binding.   webview!!.visibility = View.INVISIBLE
-        binding.   webview!!.settings.javaScriptEnabled = true
-        binding.   webview!!.webViewClient = object : WebViewClient() {
+        binding.webview!!.visibility = View.INVISIBLE
+        binding.webview!!.settings.javaScriptEnabled = true
+        binding.webview!!.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 if (url.contains("download")) {
                     return true
@@ -265,7 +268,7 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
 
             override fun onPageFinished(view: WebView, url: String) {}
         }
-        binding.   webview!!.webChromeClient = WebChromeClientCustom()
+        binding.webview!!.webChromeClient = WebChromeClientCustom()
         //        mWebView.setWebChromeClient(new WebChromeClient() {
 //
 //            @Override
@@ -278,7 +281,7 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
 //
 
         // mWebView.addHttpHeader("X-Requested-With", "");
-        binding.   webview !!.loadUrl(src)
+        binding.webview!!.loadUrl(src)
     }
 
     private fun getLinkStream(src: String) {
@@ -293,14 +296,14 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
                     val jsonArray1 = value.getJSONArray("source")
                     val linkDownload = jsonArray1.getJSONObject(0)
                     val link1 = link.getString("file")
-                     linkStream.add(link1)
+                    linkStream.add(link1)
 
                     val link2 = linkDownload.getString("file")
                     linkStream.add(link2)
                     Log.d(TAG, "onResponse 1: $link1")
                     Log.d(TAG, "onResponse 2: $link2")
 
-                    if (linkStream.size!=0) playVideo(linkStream.first())
+                    if (linkStream.size != 0) playVideo(linkStream.first())
 
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -353,15 +356,15 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
             if (!isReady && newProgress > 80) {
                 isReady = true
                 binding.frame!!.visibility = View.GONE
-                binding.   webview!!.visibility = View.VISIBLE
-                binding.   webview!!.loadUrl(
+                binding.webview!!.visibility = View.VISIBLE
+                binding.webview!!.loadUrl(
                     "javascript:(function() { " +
                             "var iframe = document.getElementsByClassName('watch_video watch-iframe')[0]; document.body.innerHTML = ''; document.body.appendChild(iframe); " +
                             "})()"
                 )
                 Log.d(TAG, "onPageFinished: ")
             }
-            binding.   webview!!.loadUrl(
+            binding.webview!!.loadUrl(
                 "javascript:(function() { " +
                         "document.getElementsByClassName('jw-icon')[14].style.display='none'; })()"
             )
@@ -425,12 +428,11 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
 
     override fun onBackPressed() {
         //TODO IKLAN
-       //ShowMaxInterstitialAd();
+        //ShowMaxInterstitialAd();
         saveToHistoryDB()
         finish()
         super.onBackPressed()
     }
-
 
 
     companion object {
@@ -442,52 +444,58 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
                 View.SYSTEM_UI_FLAG_IMMERSIVE
     }
 
-  private val jsonListener  = object :FetchPage.Listener{
-      override fun onSuccess(result: String) {
-          fetchPage =null
+    private val jsonListener = object : FetchPage.Listener {
+        override fun onSuccess(result: String) {
+            binding.errorLayout.root.visibility = View.GONE
+            binding.linearLayout.visibility = View.VISIBLE
+            binding.swipeRefreshLayout.isRefreshing = false
+            fetchPage = null
 
-          //TODO IKLAN
-          // checkingInterAds()
-          episodes!!.clear()
-          findViewById<View>(R.id.linearLayout).visibility = View.VISIBLE
-          val document = Jsoup.parse(result)
-          binding.textViewTitle!!.text = intent.getStringExtra("title")
-          findViewById<View>(R.id.textViewMoreDrama).setOnClickListener {
-              val intent = Intent(this@EpisodeActivity, DetailActivity::class.java)
-              intent.putExtra(
-                  "link", "https://watchasian.la" + document.getElementsByClass("watch-drama")
-                      .select("div.category").select("a").attr("href")
-              )
-              startActivity(intent)
-          }
+            //TODO IKLAN
+            // checkingInterAds()
+            episodes!!.clear()
+            findViewById<View>(R.id.linearLayout).visibility = View.VISIBLE
+            val document = Jsoup.parse(result)
+            binding.textViewTitle!!.text = intent.getStringExtra("title")
+            findViewById<View>(R.id.textViewMoreDrama).setOnClickListener {
+                val intent = Intent(this@EpisodeActivity, DetailActivity::class.java)
+                intent.putExtra(
+                    "link", "https://watchasian.la" + document.getElementsByClass("watch-drama")
+                        .select("div.category").select("a").attr("href")
+                )
+                startActivity(intent)
+            }
 
-          val elements = document.getElementsByClass("watch-drama")
-              .select("div.block-tab").select("div.tab-content").select("iframe")
-          Log.i("getResult Epi", elements.attr("src"))
-          // loadVideo(elements.attr("src"));
-          // gotoWebView(elements.attr("src"));
-          getLinkStream(elements.attr("src"))
-          //get Elemen episode
-          val elements1 = document.getElementsByClass("block-tab").select("div.tab-content")
-              .select("ul.all-episode").select("li")
-          for (i in elements1.indices) {
-              Log.i("getList", elements1[i].select("a").text())
-              val title = elements1[i].select("a").select("h3").text().replace(
-                  document.getElementsByClass("watch-drama")
-                      .select("div.category").select("a").text(), ""
-              )
-              val link =  Utils.base_url+ elements1[i].select("a").attr("href")
-              episodes!!.add( EpisodeModel(title,link) )
-          }
-          episodeAdapter!!.notifyDataSetChanged()
-      }
+            val elements = document.getElementsByClass("watch-drama")
+                .select("div.block-tab").select("div.tab-content").select("iframe")
+            Log.i("getResult Epi", elements.attr("src"))
+            // loadVideo(elements.attr("src"));
+            // gotoWebView(elements.attr("src"));
+            getLinkStream(elements.attr("src"))
+            //get Elemen episode
+            val elements1 = document.getElementsByClass("block-tab").select("div.tab-content")
+                .select("ul.all-episode").select("li")
+            for (i in elements1.indices) {
+                Log.i("getList", elements1[i].select("a").text())
+                val title = elements1[i].select("a").select("h3").text().replace(
+                    document.getElementsByClass("watch-drama")
+                        .select("div.category").select("a").text(), ""
+                )
+                val link = Utils.base_url + elements1[i].select("a").attr("href")
+                episodes!!.add(EpisodeModel(title, link))
+            }
+            episodeAdapter!!.notifyDataSetChanged()
+        }
 
-      override fun onFailed(error: String) {
+        override fun onFailed(error: String) {
+            binding.errorLayout.root.visibility = View.VISIBLE
+            binding.linearLayout.visibility = View.GONE
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+    }
 
-      }
-  }
-
-    override fun onDestroy() {saveToHistoryDB()
+    override fun onDestroy() {
+        saveToHistoryDB()
         super.onDestroy()
     }
 }
