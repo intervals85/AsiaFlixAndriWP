@@ -59,12 +59,11 @@ class DetailActivity : AppCompatActivity(), FetchPage.Listener {
     }
 
     private fun initButtonFav() {
-        actualLink =intent.getStringExtra("link")!!
         val size = database.favoriteDao().checkFav(actualLink).size
-        if (size==1 ) binding.fab.setImageDrawable(resources.getDrawable(R.drawable.ic_heart))
+        if (size>0 ) binding.fab.setImageDrawable(resources.getDrawable(R.drawable.ic_heart))
         else  binding.fab.setImageDrawable(resources.getDrawable(R.drawable.ic_love))
         binding.fab.setOnClickListener {
-            if (size==1) database.favoriteDao().deleteFavoriteByLink(actualLink)
+            if (size>0) database.favoriteDao().deleteFavoriteByLink(actualLink)
             else {
                 val fav = Favorite(
                     binding.textTitle.text.toString(),

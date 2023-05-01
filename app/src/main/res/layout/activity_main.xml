@@ -1,63 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    android:orientation="vertical"
-    android:background="@color/primary"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:orientation="vertical"
-        android:layout_weight="1"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/TintedNavigation"
+        app:navigationIcon="@drawable/ic_burger">
 
-        <androidx.appcompat.widget.Toolbar
-            android:theme="@style/TintedNavigation"
-            app:navigationIcon="@drawable/ic_burger"
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-          <androidx.appcompat.widget.LinearLayoutCompat
-              android:id="@+id/linear"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
-              <TextView
-                  android:textStyle="bold"
-                  android:textSize="20dp"
-                  android:text="Asia - "
-                  android:textColor="@color/softBlue"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
-              <TextView
-                  android:textStyle="bold"
-                  android:textSize="20dp"
-                  android:text="Flix "
-                  android:textColor="@color/white"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
-          </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.appcompat.widget.Toolbar>
 
-        <androidx.viewpager.widget.ViewPager
-            android:layout_below="@+id/header_title"
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asia - "
+                android:textColor="@color/softBlue"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/botNav"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:backgroundTint="@color/secondary"
-        app:menu="@menu/menu_nav"
-        app:labelVisibilityMode="labeled"
-        android:layout_alignParentBottom="true"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flix "
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:context=".main.MainActivity">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/botNav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/secondary"
+                app:itemIconTint="@color/white"
+                app:itemTextColor="@color/white"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/menu_nav" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.google.android.material.navigation.NavigationView
+            android:background="@color/primary"
+            android:id="@+id/navigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:itemTextColor="@color/white"
+            app:itemRippleColor="@color/white"
+            app:itemIconTint="@color/white"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header_layout"
+            app:menu="@menu/nav_menu" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

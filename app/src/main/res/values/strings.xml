@@ -5,4 +5,7 @@
     <string name="exo_track_selection_title_audio">Audio</string>
     <string name="exo_track_selection_title_text">Text</string>
     <string name="exo_track_selection_title_video">Video</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="more_app_link">https://play.google.com/store/apps/developer?id=Bytedance+Pte.+Ltd.</string>
 </resources>

@@ -93,7 +93,7 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener  {
         } else {
            // ParsePageTask().execute(intent.getStringExtra("link"))
             fetchPage = FetchPage(jsonListener)
-             var link = if (intent.getStringExtra("link")!!.startsWith("http"))
+               link = if (intent.getStringExtra("link")!!.startsWith("http"))
                    intent.getStringExtra("link")!!
             else   Utils.base_url+intent.getStringExtra("link")!!
 

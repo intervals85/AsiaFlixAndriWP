@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.asiaflixapp.R
 import com.app.asiaflixapp.adapter.FilmAdapter
+import com.app.asiaflixapp.adapter.HistoryAdapter
 import com.app.asiaflixapp.adapter.ListAdapter
 import com.app.asiaflixapp.databinding.FragmentLibraryBinding
 import com.app.asiaflixapp.db.LocalDatabase
 import com.app.asiaflixapp.model.FilmModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LibraryFragment : Fragment(), View.OnClickListener {
     val TAG ="LibraryFragmentTAG"
@@ -32,18 +36,18 @@ class LibraryFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
     private fun getHistory() {
+        val adapter = HistoryAdapter()
+        binding.recyclerView.layoutManager=LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter=adapter
         GlobalScope.launch {
-            database.historyDao().getAllHistory().forEach {
-                Log.d(TAG, "getHistory: ${it.title} ${it.episode}")
+            withContext(Dispatchers.Main) {
+                database.historyDao().getAllHistory().forEach {
+                    adapter.addData(it)
+                    Log.d(TAG, "getHistory: ${it.title} ${it.episode}")
+                }
             }
         }
-        for (i in 0..15) {
-            films.add(
-                FilmModel("this is titl $i","https://imagecdn.me/cover/love-star-2023-1680537786.png",
-                    "https://www1.watchasian.id/love-star-2023-episode-22.html $i", "Ep 12" ,"2023")
-            )
-        }
-        binding.recyclerView.adapter = ListAdapter(films)
+
     }
 
     private fun getFav() {
@@ -51,10 +55,12 @@ class LibraryFragment : Fragment(), View.OnClickListener {
         val adapter = ListAdapter()
         binding.recyclerView.adapter=adapter
         GlobalScope.launch {
-            database.favoriteDao().getAllFav().forEach {
-                val film =FilmModel(it.title, it.image, it.link)
-                adapter.addData(film)
-                Log.d(TAG, "getFav: ${it.title} ${it.image} ${it.link}")
+            withContext(Dispatchers.Main){
+                database.favoriteDao().getAllFav().forEach {
+                    val film =FilmModel(it.title, it.image, it.link)
+                    adapter.addData(film)
+                    Log.d(TAG, "getFav: ${it.title} ${it.image} ${it.link}")
+                }
             }
         }
     }

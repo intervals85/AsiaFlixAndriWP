@@ -29,8 +29,8 @@ class HomeFragment : Fragment(), FetchPage.Listener {
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        FetchPage(this).execute(Utils.base_url)
-        getPopular()
+       /* FetchPage(this).execute(Utils.base_url)
+        getPopular()*/
         return binding.root
     }
 

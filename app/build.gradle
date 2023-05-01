@@ -19,9 +19,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            versionNameSuffix ".debug"
+            resValue "string", "app_version", "Version ${defaultConfig.versionName}${versionNameSuffix}"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "app_version", "Version ${defaultConfig.versionName}"
         }
     }
     compileOptions {
@@ -70,4 +75,6 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.3.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
     implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.github.marlonlom:timeago:4.0.3'
+
 }

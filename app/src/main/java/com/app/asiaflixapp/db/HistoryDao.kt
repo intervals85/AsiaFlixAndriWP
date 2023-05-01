@@ -30,6 +30,7 @@ interface HistoryDao {
     @Query("DELETE  FROM history ")
     fun deleteAllHistory()
 
+
    @Query("DELETE  FROM history WHERE link = :link ")
     fun deleteHistoryByEpisodeLink(link: String)
 

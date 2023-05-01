@@ -43,25 +43,25 @@ open class PlayerActivity : AppCompatActivity() {
     var speed = arrayOf("0.25x", "0.5x", "Normal", "1.5x", "2x")
 
     //demo url
-     var url1 = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
-  //  var url1 = "https://scontent.xx.fbcdn.net/v/t39.25447-2/323642663_584469806846408_5570185725061974310_n.mp4?_nc_cat=100&vs=9ccc2a51871b28b4&_nc_vs=HBksFQAYJEdDZGxTaFBJRVRoN2toTUNBQ1pKUmFOblJrMU5ibWRqQUFBRhUAAsgBABUAGCRHTHk5TkJOekhCZzY1Sk1BQUFENVpDaHNmbXR2YnJGcUFBQUYVAgLIAQBLB4gScHJvZ3Jlc3NpdmVfcmVjaXBlATENc3Vic2FtcGxlX2ZwcwAQdm1hZl9lbmFibGVfbnN1YgAgbWVhc3VyZV9vcmlnaW5hbF9yZXNvbHV0aW9uX3NzaW0AKGNvbXB1dGVfc3NpbV9vbmx5X2F0X29yaWdpbmFsX3Jlc29sdXRpb24AHXVzZV9sYW5jem9zX2Zvcl92cW1fdXBzY2FsaW5nABFkaXNhYmxlX3Bvc3RfcHZxcwAVACUAHAAAJprFzdzs0rACFZBOKAJDMxgLdnRzX3ByZXZpZXccF0By6AAAAAAAGClkYXNoX2k0bGl0ZWJhc2ljXzVzZWNnb3BfaHExX2ZyYWdfMl92aWRlbxIAGBh2aWRlb3MudnRzLmNhbGxiYWNrLnByb2Q4ElZJREVPX1ZJRVdfUkVRVUVTVBsOiBVvZW1fdGFyZ2V0X2VuY29kZV90YWcGb2VwX2hkE29lbV9yZXF1ZXN0X3RpbWVfbXMBMAxvZW1fY2ZnX3J1bGUHdW5tdXRlZBNvZW1fcm9pX3JlYWNoX2NvdW50BTI4NDM4EW9lbV9pc19leHBlcmltZW50ABFvZW1fcm9pX3VzZXJfdGllcgN1Z2Meb2VtX3JvaV9wcmVkaWN0ZWRfd2F0Y2hfdGltZV9zATAWb2VtX3JvaV9yZWNpcGVfYmVuZWZpdAUwLjAwMCVvZW1fcm9pX3N0YXRpY19iZW5lZml0X2Nvc3RfZXZhbHVhdG9yC3Byb2dyZXNzaXZlDG9lbV92aWRlb19pZA84ODk0MjI4ODU4MTYzMTUSb2VtX3ZpZGVvX2Fzc2V0X2lkEDM0ODg5MzYxMzgwMDkyODMVb2VtX3ZpZGVvX3Jlc291cmNlX2lkDzY2OTkyNjQxMTU3OTcyNRxvZW1fc291cmNlX3ZpZGVvX2VuY29kaW5nX2lkDzU2NDAzODMwODU1MjM0NQ52dHNfcmVxdWVzdF9pZA82YzJmYjQ4ZTRjMDE0MjElAhwcHBXw5hcbAVUAAhsBVQACHBUCAAAAFoC6twMAJcQBGweIAXMENzk2MwJjZAoyMDIzLTAxLTAyA3JjYgUyODQwMANhcHAFVmlkZW8CY3QZQ09OVEFJTkVEX1BPU1RfQVRUQUNITUVOVBNvcmlnaW5hbF9kdXJhdGlvbl9zBTMwMi41AnRzFXByb2dyZXNzaXZlX2VuY29kaW5ncwA%3D&ccb=1-7&_nc_sid=41a7d5&_nc_ohc=fxguD11Hc-IAX_RRtPc&_nc_ht=video.fcgk6-2.fna&oh=00_AfC3vctndkj1GBj_kRN3ZlpjpSiT19H9b6ksF1UEcfMLHg&oe=63C5601F&_nc_rid=276832375647167"
+    var url1 = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+    //  var url1 = "https://scontent.xx.fbcdn.net/v/t39.25447-2/323642663_584469806846408_5570185725061974310_n.mp4?_nc_cat=100&vs=9ccc2a51871b28b4&_nc_vs=HBksFQAYJEdDZGxTaFBJRVRoN2toTUNBQ1pKUmFOblJrMU5ibWRqQUFBRhUAAsgBABUAGCRHTHk5TkJOekhCZzY1Sk1BQUFENVpDaHNmbXR2YnJGcUFBQUYVAgLIAQBLB4gScHJvZ3Jlc3NpdmVfcmVjaXBlATENc3Vic2FtcGxlX2ZwcwAQdm1hZl9lbmFibGVfbnN1YgAgbWVhc3VyZV9vcmlnaW5hbF9yZXNvbHV0aW9uX3NzaW0AKGNvbXB1dGVfc3NpbV9vbmx5X2F0X29yaWdpbmFsX3Jlc29sdXRpb24AHXVzZV9sYW5jem9zX2Zvcl92cW1fdXBzY2FsaW5nABFkaXNhYmxlX3Bvc3RfcHZxcwAVACUAHAAAJprFzdzs0rACFZBOKAJDMxgLdnRzX3ByZXZpZXccF0By6AAAAAAAGClkYXNoX2k0bGl0ZWJhc2ljXzVzZWNnb3BfaHExX2ZyYWdfMl92aWRlbxIAGBh2aWRlb3MudnRzLmNhbGxiYWNrLnByb2Q4ElZJREVPX1ZJRVdfUkVRVUVTVBsOiBVvZW1fdGFyZ2V0X2VuY29kZV90YWcGb2VwX2hkE29lbV9yZXF1ZXN0X3RpbWVfbXMBMAxvZW1fY2ZnX3J1bGUHdW5tdXRlZBNvZW1fcm9pX3JlYWNoX2NvdW50BTI4NDM4EW9lbV9pc19leHBlcmltZW50ABFvZW1fcm9pX3VzZXJfdGllcgN1Z2Meb2VtX3JvaV9wcmVkaWN0ZWRfd2F0Y2hfdGltZV9zATAWb2VtX3JvaV9yZWNpcGVfYmVuZWZpdAUwLjAwMCVvZW1fcm9pX3N0YXRpY19iZW5lZml0X2Nvc3RfZXZhbHVhdG9yC3Byb2dyZXNzaXZlDG9lbV92aWRlb19pZA84ODk0MjI4ODU4MTYzMTUSb2VtX3ZpZGVvX2Fzc2V0X2lkEDM0ODg5MzYxMzgwMDkyODMVb2VtX3ZpZGVvX3Jlc291cmNlX2lkDzY2OTkyNjQxMTU3OTcyNRxvZW1fc291cmNlX3ZpZGVvX2VuY29kaW5nX2lkDzU2NDAzODMwODU1MjM0NQ52dHNfcmVxdWVzdF9pZA82YzJmYjQ4ZTRjMDE0MjElAhwcHBXw5hcbAVUAAhsBVQACHBUCAAAAFoC6twMAJcQBGweIAXMENzk2MwJjZAoyMDIzLTAxLTAyA3JjYgUyODQwMANhcHAFVmlkZW8CY3QZQ09OVEFJTkVEX1BPU1RfQVRUQUNITUVOVBNvcmlnaW5hbF9kdXJhdGlvbl9zBTMwMi41AnRzFXByb2dyZXNzaXZlX2VuY29kaW5ncwA%3D&ccb=1-7&_nc_sid=41a7d5&_nc_ohc=fxguD11Hc-IAX_RRtPc&_nc_ht=video.fcgk6-2.fna&oh=00_AfC3vctndkj1GBj_kRN3ZlpjpSiT19H9b6ksF1UEcfMLHg&oe=63C5601F&_nc_rid=276832375647167"
 
     //208A8A8A
     var simpleExoPlayer: SimpleExoPlayer? = null
     var playerView: PlayerView? = null
-    lateinit var    dialog :BottomSheetDialog
+    lateinit var dialog: BottomSheetDialog
     var episodeId: Int = 0
-    lateinit var farwordBtn :ImageView
-    lateinit var rewBtn :ImageView
-    lateinit var setting :ImageView
-    lateinit var speedBtn :ImageView
-    lateinit var speedTxt :TextView
-    lateinit var exoCast : MediaRouteButton
+    lateinit var farwordBtn: ImageView
+    lateinit var rewBtn: ImageView
+    lateinit var setting: ImageView
+    lateinit var speedBtn: ImageView
+    lateinit var speedTxt: TextView
+    lateinit var exoCast: MediaRouteButton
     lateinit var castContext: CastContext
-    lateinit var binding : ActivityEpisodeBinding
-    var film_image =""
-    var film_title =""
-    var link =""
+    lateinit var binding: ActivityEpisodeBinding
+    var film_image = ""
+    var film_title = ""
+    var link = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEpisodeBinding.inflate(layoutInflater)
@@ -77,28 +77,26 @@ open class PlayerActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun initPlayer() {
         simpleExoPlayer = SimpleExoPlayer.Builder(this).setTrackSelector(trackSelector!!).build()
-        playerView =binding.exoPlayerView
+        playerView = binding.exoPlayerView
         playerView!!.player = simpleExoPlayer
 
         playerView!!.setControllerVisibilityListener { visibility ->
-            Log.d(  TAG,  "onVisibilityChange: $visibility" )
+            Log.d(TAG, "onVisibilityChange: $visibility")
         }
-        castContext= CastContext.getSharedInstance(this)
+        castContext = CastContext.getSharedInstance(this)
 
-        exoCast =  playerView!!.findViewById (R.id.exo_cast)
+        exoCast = playerView!!.findViewById(R.id.exo_cast)
         CastButtonFactory.setUpMediaRouteButton(applicationContext, exoCast)
         initCast()
 
 
         farwordBtn = playerView!!.findViewById(R.id.fwd)
-        rewBtn  = playerView!!.findViewById<ImageView>(R.id.rew)
-        setting  = playerView!!.findViewById<ImageView>(R.id.exo_track_selection_view)
-        speedBtn  = playerView!!.findViewById<ImageView>(R.id.exo_playback_speed)
-        speedTxt  = playerView!!.findViewById<TextView>(R.id.speed)
+        rewBtn = playerView!!.findViewById<ImageView>(R.id.rew)
+        setting = playerView!!.findViewById<ImageView>(R.id.exo_track_selection_view)
+        speedBtn = playerView!!.findViewById<ImageView>(R.id.exo_playback_speed)
+        speedTxt = playerView!!.findViewById<TextView>(R.id.speed)
         speedBtn.setOnClickListener {
             val builder = AlertDialog.Builder(this@PlayerActivity)
             builder.setTitle("Set Speed")
@@ -151,31 +149,33 @@ open class PlayerActivity : AppCompatActivity() {
             requestedOrientation = if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 // code for portrait mode
 
-                binding.swipeRefreshLayout.isEnabled=false
+                binding.swipeRefreshLayout.isEnabled = false
                 val params = binding.relativeVideo.getLayoutParams()
                 params.width = ViewGroup.LayoutParams.MATCH_PARENT
-                params.height =ViewGroup.LayoutParams.MATCH_PARENT
+                params.height = ViewGroup.LayoutParams.MATCH_PARENT
                 binding.relativeVideo.setLayoutParams(params)
-                binding.linearList.visibility=View.GONE
-                binding.nestedScrollView.visibility=View.GONE
+                binding.linearList.visibility = View.GONE
+                binding.nestedScrollView.visibility = View.GONE
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             } else {
                 // code for landscape mode
-                binding.swipeRefreshLayout.isEnabled=true
+                binding.swipeRefreshLayout.isEnabled = true
                 val params = binding.relativeVideo.getLayoutParams()
                 params.width = ViewGroup.LayoutParams.MATCH_PARENT
                 params.height = getResources().getDimension(R.dimen.video_height).toInt()
                 binding.relativeVideo.setLayoutParams(params)
 
-                binding.linearList.visibility=View.VISIBLE
-                binding.nestedScrollView.visibility=View.VISIBLE
+                binding.linearList.visibility = View.VISIBLE
+                binding.nestedScrollView.visibility = View.VISIBLE
                 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             }
         }
 
 
-        playerView!!.findViewById<View>(R.id.exo_play).setOnClickListener { simpleExoPlayer!!.play() }
-        playerView!!. findViewById<View>(R.id.exo_pause).setOnClickListener { simpleExoPlayer!!.pause() }
+        playerView!!.findViewById<View>(R.id.exo_play)
+            .setOnClickListener { simpleExoPlayer!!.play() }
+        playerView!!.findViewById<View>(R.id.exo_pause)
+            .setOnClickListener { simpleExoPlayer!!.pause() }
         simpleExoPlayer!!.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
                 if (state == ExoPlayer.STATE_READY) {
@@ -222,7 +222,7 @@ open class PlayerActivity : AppCompatActivity() {
         simpleExoPlayer!!.play()
 
         val castPlayer = CastPlayer(castContext)
-        castPlayer.setSessionAvailabilityListener(object :SessionAvailabilityListener{
+        castPlayer.setSessionAvailabilityListener(object : SessionAvailabilityListener {
             override fun onCastSessionAvailable() {
                 if (mediaItem != null) {
                     castPlayer.setMediaItem(mediaItem)
@@ -277,22 +277,26 @@ open class PlayerActivity : AppCompatActivity() {
         get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 
 
-    fun saveToHistoryDB(){
-        var duration :Long = simpleExoPlayer!!.duration
-        var runtime :Long = simpleExoPlayer!!.contentPosition
-        if (binding.webview.visibility==View.VISIBLE){
-            duration = 0
-            runtime=0
+    fun saveToHistoryDB() {
+        if (simpleExoPlayer?.playbackState != ExoPlayer.STATE_READY) return
+        var duration: Long = 0
+        var runtime: Long =0
+      if (binding.exoPlayerView.visibility == View.VISIBLE) {
+            duration = simpleExoPlayer!!.duration
+            runtime =  simpleExoPlayer!!.currentPosition
         }
-        val history =History(film_title, film_image, binding.textViewTitle.text.toString(),
-            link,runtime.toString(),duration.toString(), System.currentTimeMillis())
+        val history = History(
+            film_title, film_image, binding.textViewTitle.text.toString(),
+            link, runtime.toString(), duration.toString(), System.currentTimeMillis()
+        )
+        if (simpleExoPlayer?.isPlaying == true) simpleExoPlayer!!.stop()
         val database: LocalDatabase by lazy { LocalDatabase.getDatabase(this) }
         GlobalScope.launch {
             if (database.historyDao().getLastHistory().isNotEmpty()) {
-               database.historyDao().deleteHistory(history)
+                database.historyDao().deleteHistoryByEpisodeLink(link)
             }
             database.historyDao().insertHistory(history)
         }
-        if (simpleExoPlayer?.isPlaying == true) simpleExoPlayer!!.stop()
+
     }
 }
