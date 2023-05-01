@@ -3,6 +3,7 @@ package com.app.asiaflixapp.helper
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.Window
@@ -14,7 +15,6 @@ import android.widget.Toast
 import androidx.annotation.ColorRes
 import com.app.asiaflixapp.databinding.TagItemBinding
 import com.bumptech.glide.Glide
-import com.veinhorn.tagview.TagView
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,6 +23,8 @@ import java.util.*
 object Utils {
 
     val base_url = "https://watchasian.la/"
+    val DATABSENAME ="db_asiaflixapp"
+
     fun setSystemBarColor(act: Activity, @ColorRes color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val window: Window = act.window
@@ -148,6 +150,11 @@ object Utils {
         return  binding.root
 
     }
-
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
 
 }

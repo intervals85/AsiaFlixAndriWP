@@ -13,6 +13,7 @@ import com.app.asiaflixapp.R
 import com.app.asiaflixapp.activity.DetailActivity
 import com.app.asiaflixapp.model.BannerModel
 import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.smarteist.autoimageslider.SliderViewAdapter
 
 
@@ -40,7 +41,7 @@ class SliderAdapter(context: Context) : SliderViewAdapter<SliderAdapter.SliderAd
     }
 
     fun getItem(): MutableList<BannerModel> {
-        return  mSliderItems
+        return mSliderItems
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): SliderAdapterVH {
@@ -52,10 +53,10 @@ class SliderAdapter(context: Context) : SliderViewAdapter<SliderAdapter.SliderAd
         val sliderItem: BannerModel = mSliderItems[position]
         viewHolder.textTitle.text = sliderItem.title
         viewHolder.textYear.text = sliderItem.released
-       Glide.with(viewHolder.itemView)
+        Glide.with(viewHolder.itemView)
             .load(sliderItem.imageUrl)
             .into(viewHolder.imageViewBackground)
-        viewHolder.itemView.setOnClickListener {
+        viewHolder.btn.setOnClickListener {
             val intent = Intent(viewHolder.itemView.context, DetailActivity::class.java)
             intent.putExtra("link", sliderItem.filmUrl)
             viewHolder.itemView.context.startActivity(intent)
@@ -72,8 +73,10 @@ class SliderAdapter(context: Context) : SliderViewAdapter<SliderAdapter.SliderAd
         var imageViewBackground: ImageView
         var textYear: TextView
         var textTitle: TextView
+        var btn: MaterialButton
 
         init {
+            btn = view.findViewById(R.id.btn)
             imageViewBackground = view.findViewById(R.id.image)
             textYear = view.findViewById(R.id.text_year)
             textTitle = view.findViewById(R.id.text_title)

@@ -22,4 +22,15 @@
         <item name="android:editTextColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
     </style>
+    <style parent="ThemeOverlay.AppCompat.Dialog.Alert" name="TrackSelectionDialogThemeOverlay">
+
+        <item name="windowNoTitle">false</item>
+
+    </style>
+    <style name="fullScreen" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

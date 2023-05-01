@@ -106,7 +106,6 @@
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab"
                     android:src="@drawable/ic_love"
-                    app:tint="@color/white"
                     app:backgroundTint="@color/softBlue"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="18dp"
@@ -116,7 +115,7 @@
 
             <TextView
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:id="@+id/text_title_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,6 +144,7 @@
 
 
             <LinearLayout
+                android:id="@+id/linear_cast"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
