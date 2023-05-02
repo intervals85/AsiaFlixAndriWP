@@ -149,4 +149,9 @@ class HomeFragment : Fragment(), FetchPage.Listener {
         binding.linearMain.visibility=View.GONE
         binding.errorLayout.root.visibility=View.VISIBLE
     }
+
+    override fun onResume() {
+        if (binding.linearMain.visibility==View.GONE) binding.swipeRefreshLayout.isRefreshing=true
+        super.onResume()
+    }
 }

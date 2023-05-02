@@ -12,7 +12,6 @@ import android.webkit.*
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -77,12 +76,6 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener {
         })
         getData()
 
-        //TODO IKLAN
-        /*    AppLovinSdk.getInstance(this).mediationProvider = "max"
-            AppLovinSdk.initializeSdk(this) {
-                ShowMaxBannerAd()
-                LoadMaxInterstitialAd()
-            }*/
     }
 
     private fun getData() {
@@ -149,48 +142,6 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener {
         ).show()
 
     }
-    //TODO IKLAN
-
-    /*fun ShowMaxBannerAd() {
-         val maxBannerAdView: MaxAdView = findViewById(R.id.MaxAdView)
-        maxBannerAdView.loadAd();
-    }
-
-    fun LoadMaxInterstitialAd() {
-        interstitialAd = MaxInterstitialAd("cb347433e2c6f285", this)
-        val maxAdListener: MaxAdListener = object : MaxAdListener {
-            override fun onAdLoaded(maxAd: MaxAd) {
-                retryAttempt = 0
-            }
-
-            override fun onAdLoadFailed(adUnitId: String, error: MaxError) {
-                retryAttempt++
-                val delayMillis = TimeUnit.SECONDS.toMillis(
-                    Math.pow(2.0, Math.min(6, retryAttempt).toDouble()).toLong()
-                )
-                Handler().postDelayed({ interstitialAd!!.loadAd() }, delayMillis)
-            }
-
-            override fun onAdDisplayFailed(maxAd: MaxAd, error: MaxError) {
-                interstitialAd!!.loadAd()
-            }
-
-            override fun onAdDisplayed(maxAd: MaxAd) {}
-            override fun onAdClicked(maxAd: MaxAd) {}
-            override fun onAdHidden(maxAd: MaxAd) {
-                interstitialAd!!.loadAd()
-            }
-        }
-        interstitialAd!!.setListener(maxAdListener)
-        interstitialAd!!.loadAd()
-    }
-
-    fun ShowMaxInterstitialAd() {
-        if (interstitialAd!!.isReady) {
-            interstitialAd!!.showAd()
-        }
-    }*/
-
     override fun onPageStarted(url: String, favicon: Bitmap) {
         Log.d(TAG, "onPageStarted: ")
     }
@@ -284,9 +235,13 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener {
         binding.webview!!.loadUrl(src)
     }
 
-    private fun getLinkStream(src: String) {
+    private fun getLinkStream(  src: String) {
+        var url =src
+        if (!src.startsWith("http")) {
+            url = "https:$src"
+        }
         val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
-            Method.GET, src, null,
+            Method.GET, url, null,
             Response.Listener { response ->
                 try {
                     findViewById<View>(R.id.linear_list).visibility = View.VISIBLE
@@ -343,6 +298,7 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener {
         private var mOriginalOrientation = 0
         private var mOriginalSystemUiVisibility = 0
         override fun onHideCustomView() {
+            binding.adView.visibility=View.VISIBLE
             (window.decorView as FrameLayout).removeView(mCustomView)
             mCustomView = null
             window.decorView.systemUiVisibility = mOriginalSystemUiVisibility
@@ -374,6 +330,7 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener {
             paramView: View,
             paramCustomViewCallback: CustomViewCallback
         ) {
+            binding.adView.visibility=View.GONE
             if (mCustomView != null) {
                 onHideCustomView()
                 return
@@ -427,8 +384,7 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener {
     }
 
     override fun onBackPressed() {
-        //TODO IKLAN
-        //ShowMaxInterstitialAd();
+        adsManager.ShowMaxInterstitialAd(className)
         saveToHistoryDB()
         finish()
         super.onBackPressed()
@@ -446,13 +402,11 @@ class EpisodeActivity : PlayerActivity(), AdvancedWebView.Listener {
 
     private val jsonListener = object : FetchPage.Listener {
         override fun onSuccess(result: String) {
+          //  adsManager.setOnListener()
             binding.errorLayout.root.visibility = View.GONE
             binding.linearLayout.visibility = View.VISIBLE
             binding.swipeRefreshLayout.isRefreshing = false
             fetchPage = null
-
-            //TODO IKLAN
-            // checkingInterAds()
             episodes!!.clear()
             findViewById<View>(R.id.linearLayout).visibility = View.VISIBLE
             val document = Jsoup.parse(result)

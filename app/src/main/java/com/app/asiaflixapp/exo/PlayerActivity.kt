@@ -32,6 +32,7 @@ import java.net.CookieHandler
 import java.net.CookieManager
 import java.net.CookiePolicy
 import com.app.asiaflixapp.R
+import com.app.asiaflixapp.ads.AdsManager
 import com.app.asiaflixapp.db.History
 import com.app.asiaflixapp.db.LocalDatabase
 import kotlinx.coroutines.GlobalScope
@@ -62,11 +63,15 @@ open class PlayerActivity : AppCompatActivity() {
     var film_image = ""
     var film_title = ""
     var link = ""
+    var className = ""
+    lateinit var adsManager: AdsManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEpisodeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        className = this.javaClass.simpleName
+        adsManager = AdsManager(this, binding.adView)
+        adsManager.updateLayoutHasVisit(className)
         if (CookieHandler.getDefault() !== DEFAULT_COOKIE_MANAGER) {
             CookieHandler.setDefault(DEFAULT_COOKIE_MANAGER)
         }
@@ -156,6 +161,7 @@ open class PlayerActivity : AppCompatActivity() {
                 binding.relativeVideo.setLayoutParams(params)
                 binding.linearList.visibility = View.GONE
                 binding.nestedScrollView.visibility = View.GONE
+                binding.adView.visibility = View.GONE
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             } else {
                 // code for landscape mode
@@ -167,6 +173,7 @@ open class PlayerActivity : AppCompatActivity() {
 
                 binding.linearList.visibility = View.VISIBLE
                 binding.nestedScrollView.visibility = View.VISIBLE
+                binding.adView.visibility = View.VISIBLE
                 ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             }
         }
@@ -235,20 +242,6 @@ open class PlayerActivity : AppCompatActivity() {
         })
     }
 
-//    private fun buildMediaQueueItem(video: String): MediaItem {
-//        val metadata  =  com.google.android.gms.cast.MediaMetadata(MEDIA_TYPE_MOVIE)
-//        metadata.putString(KEY_TITLE, "Title")
-//        metadata.putString(KEY_SUBTITLE, "Subtitle")
-//        metadata.addImage(WebImage(Uri.parse("any-image-url")))
-//
-//        val mediaInfo = MediaInfo.Builder(video)
-//            .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
-//            .setContentType(MimeTypes.VIDEO_MP4)
-//            .setMetadata(metadata)
-//            .build()
-//        val mediaItem = MediaQueueItem.Builder(mediaInfo).build()
-//    }
-
     fun releasePlayer() {
         if (simpleExoPlayer != null) {
             simpleExoPlayer!!.release()
@@ -290,6 +283,7 @@ open class PlayerActivity : AppCompatActivity() {
             link, runtime.toString(), duration.toString(), System.currentTimeMillis()
         )
         if (simpleExoPlayer?.isPlaying == true) simpleExoPlayer!!.stop()
+        playerView?.player= null
         val database: LocalDatabase by lazy { LocalDatabase.getDatabase(this) }
         GlobalScope.launch {
             if (database.historyDao().getLastHistory().isNotEmpty()) {
